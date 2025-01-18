@@ -1,30 +1,30 @@
 # CryptoAiTrade
 
-CryptoAiTrade is an AI-powered cryptocurrency trading platform designed to simplify trading for beginners and enhance decision-making for expert traders. With cutting-edge AI algorithms and real-time analytics, CryptoAiTrade empowers users to optimize their investments and navigate the cryptocurrency market with confidence.
+**CryptoAiTrade** is an AI-powered cryptocurrency trading platform that simplifies trading for beginners and enhances decision-making for experts. The platform leverages artificial intelligence, real-time data analytics, and a user-friendly interface to optimize trading strategies, maximize profits, and minimize risks.
 
 ---
 
 ## 🚀 Features
 
 ### **AI-Driven Trading Insights**
-- Leverage AI to analyze market trends, historical data, and provide actionable insights.
-- Maximize profits while minimizing risks.
+- Predict market trends using AI and analyze historical data.
+- Receive actionable insights to make smarter trading decisions.
 
 ### **Real-Time Market Data**
-- Access live cryptocurrency prices, volumes, and advanced charting tools.
-- Analyze performance metrics for popular trading pairs such as BTC/USDT, ETH/USDT, and SOL/USDT.
+- Access live cryptocurrency prices, trading volumes, and advanced charts.
+- Analyze performance metrics for popular trading pairs like BTC/USDT, ETH/USDT, and SOL/USDT.
 
 ### **User-Friendly Interface**
-- Intuitive and beginner-friendly design with step-by-step investment guidance.
-- Tailored for both novice and experienced traders.
+- Intuitive design that caters to both novice and experienced traders.
+- Step-by-step guidance for investments, from pair selection to payment verification.
 
 ### **Secure Transactions**
-- Bank-grade encryption for all trades and fund transfers.
+- Bank-grade encryption to ensure secure trades and fund transfers.
 - Decentralized wallet support for seamless and secure payments.
 
 ### **Portfolio Management**
-- Monitor your investments, profits, and withdrawal eligibility through an interactive dashboard.
-- AI-driven performance metrics for smarter trading decisions.
+- Monitor investments, profits, and withdrawal eligibility through an interactive dashboard.
+- AI-powered performance metrics for detailed portfolio insights.
 
 ---
 
@@ -34,3 +34,30 @@ CryptoAiTrade is an AI-powered cryptocurrency trading platform designed to simpl
 1. Clone the repository:
    ```bash
    git clone https://github.com/MedamoniSharan/CryptoAiTrade.git
+Navigate to the Frontend directory:
+bash
+Copy
+Edit
+cd CryptoAiTrade/Frontend
+Install dependencies:
+bash
+Copy
+Edit
+npm install
+Start the development server:
+bash
+Copy
+Edit
+npm start
+Access the app at http://localhost:3000.
+Backend Setup
+Navigate to the Backend directory:
+bash
+Copy
+Edit
+cd ../Backend
+Install backend dependencies:
+bash
+Copy
+Edit
+npm install
