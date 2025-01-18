@@ -34,30 +34,4 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/MedamoniSharan/CryptoAiTrade.git
-Navigate to the Frontend directory:
-bash
-Copy
-Edit
-cd CryptoAiTrade/Frontend
-Install dependencies:
-bash
-Copy
-Edit
-npm install
-Start the development server:
-bash
-Copy
-Edit
-npm start
-Access the app at http://localhost:3000.
-Backend Setup
-Navigate to the Backend directory:
-bash
-Copy
-Edit
-cd ../Backend
-Install backend dependencies:
-bash
-Copy
-Edit
-npm install
+
