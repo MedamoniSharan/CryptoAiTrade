@@ -7,14 +7,16 @@ require('dotenv').config();
 
 
 const authRoutes = require('./Routes/auth');
+const InvestmentRoutes = require('./Routes/investment');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-    origin: '*', // Allow all origins (not recommended for production)
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'], 
   };
   
 app.use(cors(corsOptions));
@@ -32,6 +34,7 @@ mongoose.connect(MONGO_URI, {
 
 //rotues:
 app.use('/api', authRoutes);
+app.use('/api', InvestmentRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
