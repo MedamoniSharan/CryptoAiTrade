@@ -39,26 +39,34 @@ const Login: React.FC = () => {
       const payload = { email, password, ...(activeTab === "signup" && { name }) };
 
       const response = await axios.post(endpoint, payload);
-      toast.success(response.data.message); // Show success toast
+      toast.success(response.data.message);
+
+      console.log("respinse .....", response.data)
 
       if (response.data.token) {
-        // Store login details in sessionStorage
-        sessionStorage.setItem(
-          "user",
-          JSON.stringify({
-            token: response.data.token,
-            userId: response.data.userId, // Store the userId
-            email: response.data.email,
-            name: response.data.name || "",
-          })
-        );
-
+        const { token, user } = response.data; // Destructure token and user from the response
+        const userData = {
+          token,
+          userId: user._id || "", // Extract _id from the user object
+          email: user.email || email, // Use email from the response or input
+          name: user.name || name || "", // Prioritize the response name
+        };
+      
+        // Store user data in sessionStorage
+        sessionStorage.setItem("user", JSON.stringify(userData));
+      
+        // Optionally store individual items for easier access
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("userId", userData.userId);
+        sessionStorage.setItem("email", userData.email);
+        sessionStorage.setItem("name", userData.name);
+      
         // Redirect to Main Page
         navigate("/mainpage");
-      }
+      }      
     } catch (err: any) {
       const message = err.response?.data?.message || "An error occurred. Please try again.";
-      toast.error(message); // Show error toast
+      toast.error(message); 
       setError(message);
     } finally {
       setIsLoading(false);

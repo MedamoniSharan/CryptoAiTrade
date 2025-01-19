@@ -26,6 +26,8 @@ function MainPage() {
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [showToast, setShowToast] = useState(false);
 
+  const API_ENDPOINT = "http://localhost:5002/api"
+
   const tradingPairs = [
     { 
       pair: 'JUP/USDT',
@@ -192,6 +194,68 @@ function MainPage() {
       </div>
     );
   };
+
+  const handleSubmit = async () => {
+    if (!screenshot || !amount || !selectedPair) {
+      alert("All fields are required!");
+      return;
+    }
+  
+    const base64Screenshot = await getBase64(screenshot);
+
+    //print all sessionStorage items
+
+    console.log("Session Storage Items:");
+  for (let i = 0; i < sessionStorage.length; i++) {
+    const key = sessionStorage.key(i);
+    const value = sessionStorage.getItem(key);
+    console.log(`${key}: ${value}`);
+  }
+  
+    const requestData = {
+      userId: sessionStorage.getItem("userId"), 
+      username: sessionStorage.getItem('name'), 
+      userEmail : sessionStorage.getItem('email'),
+      tradingPair: selectedPair,
+      status : "pending",
+      investmentAmount: amount,
+      expectedProfit: `${selectedPairData.minProfit} - ${selectedPairData.maxProfit}`,
+      withdrawalDate: formatDate(selectedPairData.withdrawalDays),
+      proofFileBase64: base64Screenshot,
+    };
+
+
+  
+    try {
+      const response = await fetch(`${API_ENDPOINT}/submit-investment`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestData),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        alert(data.message); 
+        setStep("success"); 
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+  
+  const getBase64 = (file: Blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
@@ -393,6 +457,7 @@ function MainPage() {
                     onClick={() => {
                       setStep('success');
                       setShowToast(true);
+                      handleSubmit();
                       setTimeout(() => setShowToast(false), 5000);
                       setTimeout(() => {
                         setView('dashboard');

@@ -32,7 +32,7 @@ router.post('/signin', async (req, res) => {
     if (!isPasswordValid) return res.status(400).json({ message: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
-    res.status(200).json({ token, message: 'Signed in successfully' });
+    res.status(200).json({ token,user, message: 'Signed in successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error signing in' });
   }
