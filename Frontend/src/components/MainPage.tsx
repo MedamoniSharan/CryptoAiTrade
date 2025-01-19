@@ -12,9 +12,11 @@ import {
   Upload,
   DollarSign,
   LayoutDashboard,
+  LogOut,
 } from 'lucide-react';
 import { TradingChart } from './TradingChart';
 import { Dashboard } from './Dashboard';
+import { useNavigate } from 'react-router-dom';
 import { mockInvestments } from './Dashboard';
 
 function MainPage() {
@@ -25,6 +27,7 @@ function MainPage() {
   const [amount, setAmount] = useState('');
   const [screenshot, setScreenshot] = useState<File | null>(null);
   const [showToast, setShowToast] = useState(false);
+  const navigate = useNavigate();
 
   const API_ENDPOINT = "http://localhost:5002/api"
 
@@ -203,14 +206,12 @@ function MainPage() {
   
     const base64Screenshot = await getBase64(screenshot);
 
-    //print all sessionStorage items
 
-    console.log("Session Storage Items:");
-  for (let i = 0; i < sessionStorage.length; i++) {
-    const key = sessionStorage.key(i);
-    const value = sessionStorage.getItem(key);
-    console.log(`${key}: ${value}`);
-  }
+  // for (let i = 0; i < sessionStorage.length; i++) {
+  //   const key = sessionStorage.key(i);
+  //   const value = sessionStorage.getItem(key);
+  //   console.log(`${key}: ${value}`);
+  // }
   
     const requestData = {
       userId: sessionStorage.getItem("userId"), 
@@ -255,6 +256,14 @@ function MainPage() {
       reader.onerror = (error) => reject(error);
     });
   };
+
+  const handleLogout = () => {
+    sessionStorage.clear(); 
+    alert("You have successfully logged out.");
+    navigate('/login'); 
+  };
+
+  
   
 
   return (
@@ -297,6 +306,13 @@ function MainPage() {
                 <LayoutDashboard className="w-5 h-5" />
                 <span>Dashboard</span>
               </div>
+            </button>
+            <button
+              onClick={handleLogout}
+              className="flex items-center space-x-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            >
+              <LogOut className="w-5 h-5" />
+              <span>Logout</span>
             </button>
           </div>
         </div>
