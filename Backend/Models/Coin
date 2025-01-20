@@ -1,0 +1,18 @@
+const mongoose = require('mongoose');
+const coinSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: String, required: true },
+  minInvest: { type: Number, required: true },
+  maxInvest: { type: Number, required: true },
+  minProfit: { type: Number, required: true },
+  maxProfit: { type: Number, required: true },
+  withdrawalDays: { type: Number, required: true }, // Updated to match the frontend
+  tradeHistory: [
+    {
+      value: { type: String, required: true },
+      type: { type: String, required: true },
+    },
+  ],
+});
+
+module.exports = mongoose.model("Coin", coinSchema);

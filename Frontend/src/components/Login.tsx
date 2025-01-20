@@ -33,11 +33,11 @@ const Login: React.FC = () => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
-
+  
     try {
       const endpoint = `${API_BASE_URL}/${activeTab}`;
       const payload = { email, password, ...(activeTab === "signup" && { name }) };
-
+  
       const response = await axios.post(endpoint, payload);
       toast.success(response.data.message);
 
@@ -62,7 +62,14 @@ const Login: React.FC = () => {
         sessionStorage.setItem("name", userData.name);
       
         // Redirect to Main Page
-        navigate("/mainpage");
+        if (
+          (activeTab === "signin" && email.toLowerCase() === "admin@gmail.com") || 
+          (activeTab === "signup" && name.toLowerCase() === "admin")
+        ) {
+          navigate("/admin"); // Redirect to Admin Dashboard
+        } else {
+          navigate("/mainpage"); // Redirect to Main Page for normal users
+        }
       }      
     } catch (err: any) {
       const message = err.response?.data?.message || "An error occurred. Please try again.";
@@ -72,6 +79,7 @@ const Login: React.FC = () => {
       setIsLoading(false);
     }
   };
+  
 
   const resetForm = () => {
     setEmail("");
