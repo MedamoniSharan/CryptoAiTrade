@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const API_URL = "http://localhost:5002/api/coins"; // Backend endpoint
+  const API_URL = "https://cryptoaitrade.onrender.com/api/coins"; // Backend endpoint
 
   // Fetch coins from backend
   useEffect(() => {

@@ -36,7 +36,7 @@ function generateMockTradingData() {
 export function Dashboard() {
   const [investments, setInvestments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const API_ENDPOINT = 'http://localhost:5002/api';
+  const API_ENDPOINT = 'https://cryptoaitrade.onrender.com/api';
 
   useEffect(() => {
     const fetchInvestments = async () => {

@@ -54,7 +54,7 @@ function MainPage() {
   const navigate = useNavigate();
 
   // Your backend root
-  const API_ENDPOINT = 'http://localhost:5002/api';
+  const API_ENDPOINT = 'https://cryptoaitrade.onrender.com/api';
 
   // Fetch trading pairs dynamically
   const fetchTradingPairs = async () => {

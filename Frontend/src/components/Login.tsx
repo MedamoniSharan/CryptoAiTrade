@@ -16,7 +16,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const API_BASE_URL = "http://localhost:5002/api";
+const API_BASE_URL = "https://cryptoaitrade.onrender.com/api";
 
 const Login: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"signin" | "signup">("signin");
