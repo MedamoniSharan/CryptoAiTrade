@@ -60,4 +60,37 @@ router.post('/fetch-investments', async (req, res) => {
   }
 });
 
+router.get('/getAllInvestment', async(req, res)=>{
+  try{
+    const investment = await Investment.find({});
+    // console.log("response  ", investment);
+    res.status(200).json(investment)
+
+  }catch(error){
+    console.error(error);
+    res.status(500).json({
+      message : "error in getall investment details"
+    })
+  }
+});
+
+router.post('/updateInvestmentStatus/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const updatedInvestment = await Investment.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    res.status(200).json(updatedInvestment);
+  } catch (error) {
+    console.error('Error updating investment status:', error);
+    res.status(500).json({ message: 'Error updating investment status' });
+  }
+});
+
+
 module.exports = router;

@@ -3,6 +3,8 @@ import { Dashboard } from './components/Dashboard';
 import Login from './components/Login';
 import MainPage from './components/MainPage';
 import AdminDashboard from './components/AdminDashboard';
+import InvestmentTable from './components/InvestmentTable';
+
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
           
           {/* Main Dashboard Page */}
           <Route path="/dashboard" element={<Dashboard />} />
+
+          <Route path="/InvestmentTable" element={<InvestmentTable />} />
           
           {/* Admin Dashboard */}
           <Route path="/admin" element={<AdminDashboard />} />
