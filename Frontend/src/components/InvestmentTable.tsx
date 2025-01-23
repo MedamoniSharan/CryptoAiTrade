@@ -11,14 +11,16 @@ interface Investment {
   investmentAmount: number;
   expectedProfit: string;
   withdrawalDate: string;
-  proofFile: string;
+  proofFile: string;  
   status: string;
   createdAt: string;
 }
 
 const InvestmentTable: React.FC = () => {
   const [investments, setInvestments] = useState<Investment[]>([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  // Fetch investments data on component mount
   useEffect(() => {
     const fetchInvestments = async () => {
       try {
@@ -32,6 +34,7 @@ const InvestmentTable: React.FC = () => {
     fetchInvestments();
   }, []);
 
+  // Handle status change of an investment
   const handleStatusChange = async (id: string, newStatus: string) => {
     try {
       await axios.post(`https://cryptoaitrade.onrender.com/api/updateInvestmentStatus/${id}`, { status: newStatus });
@@ -45,6 +48,7 @@ const InvestmentTable: React.FC = () => {
     }
   };
 
+  // Handle expected profit change
   const handleExpectedProfitChange = async (id: string, newProfit: string) => {
     try {
       await axios.post(`https://cryptoaitrade.onrender.com/api/updateInvestmentProfit/${id}`, { expectedProfit: newProfit });
@@ -58,6 +62,7 @@ const InvestmentTable: React.FC = () => {
     }
   };
 
+  // Handle profit sign change (+ or -) 
   const handleProfitSignChange = (id: string, profit: string, isPositive: boolean) => {
     const updatedProfit = isPositive ? `+${profit}` : `-${profit}`;
     handleExpectedProfitChange(id, updatedProfit);
@@ -68,11 +73,12 @@ const InvestmentTable: React.FC = () => {
       <h2>Investment Details</h2>
 
       <button
-          onClick={() => navigate("/admin")}
-          className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2"
-        >
-          Go to Admin Table
-        </button>
+        onClick={() => navigate("/admin")}
+        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2"
+      >
+        Go to Admin Table
+      </button>
+
       <table>
         <thead>
           <tr>
@@ -96,18 +102,21 @@ const InvestmentTable: React.FC = () => {
                 <td>{investment.investmentAmount}</td>
                 <td>
                   <div className="flex items-center">
+                    {/* Button to set positive sign */}
                     <button
                       className="px-2 py-1 mr-2 text-green-500"
                       onClick={() => handleProfitSignChange(investment._id, investment.expectedProfit, true)}
                     >
                       +
                     </button>
+                    {/* Input field for expected profit */}
                     <input
                       type="text"
                       value={investment.expectedProfit}
                       onChange={(e) => handleExpectedProfitChange(investment._id, e.target.value)}
                       className={`border p-2 ${isPositive ? 'text-green-400' : 'text-red-400'}`}
                     />
+                    {/* Button to set negative sign */}
                     <button
                       className="px-2 py-1 ml-2 text-red-500"
                       onClick={() => handleProfitSignChange(investment._id, investment.expectedProfit, false)}
@@ -118,6 +127,7 @@ const InvestmentTable: React.FC = () => {
                 </td>
                 <td>{investment.withdrawalDate}</td>
                 <td>
+                  {/* Dropdown for changing status */}
                   <select
                     value={investment.status}
                     onChange={(e) => handleStatusChange(investment._id, e.target.value)}
